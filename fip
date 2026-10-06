@@ -1,0 +1,16 @@
+#!/bin/bash
+echo '<?xml version="1.0" encoding="UTF-8"?>'
+echo '<settings>'
+echo '  <tbook complete="true">'
+index=0
+mysql -u freepbxuser -p'YOUR_DB_PASSWORD' asterisk -N -e "SELECT extension, name FROM users ORDER BY extension" | while read ext name; do
+    if [[ "$ext" =~ ^(100|101|102)$ ]]; then continue; fi
+    echo "    <item context=\"active\" type=\"\" fav=\"false\" mod=\"false\" index=\"$index\">"
+    echo "      <Name>$(echo $name | sed 's/&/\&amp;/g')</Name>"
+    echo "      <number>$ext</number>"
+    echo "      <number_type>business</number_type>"
+    echo "    </item>"
+    index=$((index+1))
+done
+echo '  </tbook>'
+echo '</settings>'
