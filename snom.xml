@@ -1,1 +1,7 @@
-test
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <phone-settings>
+    <phonebook url="http://192.168.90.30/phonebook.xml" perm="RW" />
+    <extdir_interval idx="1" perm="RW">86400</extdir_interval>
+  </phone-settings>
+</settings>
